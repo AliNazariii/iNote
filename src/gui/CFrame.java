@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CFrame extends JFrame implements ActionListener {
-
+public class CFrame extends JFrame implements ActionListener
+{
     private CMainPanel mainPanel;
 
     private JMenuItem newItem;
@@ -13,7 +13,8 @@ public class CFrame extends JFrame implements ActionListener {
     private JMenuItem exitItem;
 
 
-    public CFrame(String title) {
+    public CFrame(String title)
+    {
         super(title);
 
         initMenuBar(); //create menuBar
@@ -21,7 +22,8 @@ public class CFrame extends JFrame implements ActionListener {
         initMainPanel(); //create main panel
     }
 
-    private void initMenuBar() {
+    private void initMenuBar()
+    {
         JMenuBar menuBar = new JMenuBar();
         JMenu jmenu = new JMenu("File");
 
@@ -41,21 +43,30 @@ public class CFrame extends JFrame implements ActionListener {
         setJMenuBar(menuBar);
     }
 
-    private void initMainPanel() {
+    private void initMainPanel()
+    {
         mainPanel = new CMainPanel();
         add(mainPanel);
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == newItem) {
+    public void actionPerformed(ActionEvent e)
+    {
+        if (e.getSource() == newItem)
+        {
             mainPanel.addNewTab();
-        } else if (e.getSource() == saveItem) {
+        }
+        else if (e.getSource() == saveItem)
+        {
             mainPanel.saveNote();
-        } else if (e.getSource() == exitItem) {
+        }
+        else if (e.getSource() == exitItem)
+        {
             //TODO: Phase1: check all tabs saved ...
             System.exit(0);
-        } else {
+        }
+        else
+        {
             System.out.println("Nothing detected...");
         }
     }

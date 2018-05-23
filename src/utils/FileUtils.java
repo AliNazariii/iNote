@@ -1,31 +1,51 @@
 package utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
-public class FileUtils {
-
+public class FileUtils
+{
     private static final String NOTES_PATH = "./notes/";
 
     //It's a static initializer. It's executed when the class is loaded.
     //It's similar to constructor
-    static {
+    static
+    {
         boolean isSuccessful = new File(NOTES_PATH).mkdirs();
         System.out.println("Creating " + NOTES_PATH + " directory is successful: " + isSuccessful);
     }
 
-    public static File[] getFilesInDirectory() {
+    public static File[] getFilesInDirectory()
+    {
         return new File(NOTES_PATH).listFiles();
     }
 
 
-    public static String fileReader(File file) {
+    public static String fileReader(File file)
+    {
         //TODO: Phase1: read content from file
         return "";
     }
 
-    public static void fileWriter(String content) {
+    public static void fileWriter(String content)
+    {
         //TODO: write content on file
         String fileName = getProperFileName(content);
+        try (FileOutputStream out = new FileOutputStream(NOTES_PATH + fileName + ".txt"))
+        {
+            int c = content.length();
+            out.write(c);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     //TODO: Phase1: define method here for reading file with InputStream
@@ -33,7 +53,8 @@ public class FileUtils {
 
     //TODO: Phase2: proper methods for handling serialization
 
-    private static String getProperFileName(String content) {
+    private static String getProperFileName(String content)
+    {
         int loc = content.indexOf("\n");
         if (loc != -1) {
             return content.substring(0, loc);

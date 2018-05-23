@@ -5,13 +5,12 @@ import utils.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.File;
 
 
-public class CMainPanel extends JPanel {
-
+public class CMainPanel extends JPanel
+{
     private JTabbedPane tabbedPane;
     private JList<File> directoryList;
 
@@ -26,12 +25,14 @@ public class CMainPanel extends JPanel {
         addNewTab(); // open new empty tab when user open the application
     }
 
-    private void initTabbedPane() {
+    private void initTabbedPane()
+    {
         tabbedPane = new JTabbedPane();
         add(tabbedPane, BorderLayout.CENTER);
     }
 
-    private void initDirectoryList() {
+    private void initDirectoryList()
+    {
         File[] files = FileUtils.getFilesInDirectory();
         directoryList = new JList<>(files);
 
@@ -48,14 +49,15 @@ public class CMainPanel extends JPanel {
         add(new JScrollPane(directoryList), BorderLayout.WEST);
     }
 
-
-    public void addNewTab() {
+    public void addNewTab()
+    {
         JTextArea textPanel = createTextPanel();
         textPanel.setText("Write Something here...");
         tabbedPane.addTab("Tab " + (tabbedPane.getTabCount() + 1), textPanel);
     }
 
-    public void openExistingNote(String content) {
+    public void openExistingNote(String content)
+    {
         JTextArea existPanel = createTextPanel();
         existPanel.setText(content);
 
@@ -64,32 +66,39 @@ public class CMainPanel extends JPanel {
         tabbedPane.setSelectedIndex(tabIndex - 1);
     }
 
-    public void saveNote() {
+    public void saveNote()
+    {
         JTextArea textPanel = (JTextArea) tabbedPane.getSelectedComponent();
         String note = textPanel.getText();
-        if (!note.isEmpty()) {
+        if (!note.isEmpty())
+        {
             FileUtils.fileWriter(note);
         }
         updateListGUI();
     }
 
-    private JTextArea createTextPanel() {
+    private JTextArea createTextPanel()
+    {
         JTextArea textPanel = new JTextArea();
         textPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         return textPanel;
     }
 
-    private void updateListGUI() {
+    private void updateListGUI()
+    {
         File[] newFiles = FileUtils.getFilesInDirectory();
         directoryList.setListData(newFiles);
     }
 
 
-    private class MyMouseAdapter extends MouseAdapter {
+    private class MyMouseAdapter extends MouseAdapter
+    {
         @Override
-        public void mouseClicked(MouseEvent eve) {
+        public void mouseClicked(MouseEvent eve)
+        {
             // Double-click detected
-            if (eve.getClickCount() == 2) {
+            if (eve.getClickCount() == 2)
+            {
                 int index = directoryList.locationToIndex(eve.getPoint());
                 System.out.println("Item " + index + " is clicked...");
                 //TODO: Phase1: Click on file is handled... Just load content into JTextArea
@@ -101,18 +110,22 @@ public class CMainPanel extends JPanel {
     }
 
 
-    private class MyCellRenderer extends DefaultListCellRenderer {
-
+    private class MyCellRenderer extends DefaultListCellRenderer
+    {
         @Override
         public Component getListCellRendererComponent(JList list, Object object, int index, boolean isSelected, boolean cellHasFocus) {
-            if (object instanceof File) {
+            if (object instanceof File)
+            {
                 File file = (File) object;
                 setText(file.getName());
                 setIcon(FileSystemView.getFileSystemView().getSystemIcon(file));
-                if (isSelected) {
+                if (isSelected)
+                {
                     setBackground(list.getSelectionBackground());
                     setForeground(list.getSelectionForeground());
-                } else {
+                }
+                else
+                {
                     setBackground(list.getBackground());
                     setForeground(list.getForeground());
                 }
