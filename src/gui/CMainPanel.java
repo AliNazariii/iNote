@@ -90,6 +90,19 @@ public class CMainPanel extends JPanel
         directoryList.setListData(newFiles);
     }
 
+    public void saveOnExit()
+    {
+        for (int i = 0; i < tabbedPane.getTabCount(); i++)
+        {
+            JTextArea text = (JTextArea)tabbedPane.getComponentAt(i);
+            String note = text.getText();
+            if (!note.isEmpty())
+            {
+                FileUtils.fileWriter(note);
+            }
+        }
+    }
+
 
     private class MyMouseAdapter extends MouseAdapter
     {

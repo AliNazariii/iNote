@@ -2,8 +2,8 @@ package model;
 
 public class Note
 {
-// TODO: Phase2: uncomment this code
-    /*private String title;
+    // TODO: Phase2: uncomment this code
+    private String title;
     private String content;
     private String date;
 
@@ -24,5 +24,6 @@ public class Note
                 '}';
     }
 
-*/
+
+
 }

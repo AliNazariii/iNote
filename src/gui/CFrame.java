@@ -63,6 +63,7 @@ public class CFrame extends JFrame implements ActionListener
         else if (e.getSource() == exitItem)
         {
             //TODO: Phase1: check all tabs saved ...
+            mainPanel.saveOnExit();
             System.exit(0);
         }
         else
