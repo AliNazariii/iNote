@@ -1,9 +1,6 @@
 package utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 public class FileUtils
 {
@@ -26,7 +23,25 @@ public class FileUtils
     public static String fileReader(File file)
     {
         //TODO: Phase1: read content from file
-        return "";
+        String content = "";
+        try (FileInputStream in = new FileInputStream(file))
+        {
+            byte[] buffer = new byte[4096];
+            int c;
+            while ((c = in.read(buffer)) != -1)
+            {
+                content += new String(buffer);
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return content;
     }
 
     public static void fileWriter(String content)
